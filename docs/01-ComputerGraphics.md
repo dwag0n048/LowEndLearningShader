@@ -1,3 +1,5 @@
+Its recommended to view it in the Code view instead of the Preview
+
 # How is an image created?
 
 ## The big picture

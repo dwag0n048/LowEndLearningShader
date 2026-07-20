@@ -1,3 +1,5 @@
+Its recommended to view it in the Code view instead of the Preview
+
 v0.1  GPU Basics
 v0.2  Color Correction
 v0.3  Lighting
