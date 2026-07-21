@@ -1,6 +1,6 @@
 Its recommended to view it in the Code view instead of the Preview
 
-# How is an image created?
+# How is an Image Rendered?
 
 ## The big picture
 
@@ -15,10 +15,10 @@ CPU → OpenGL → GPU → Monitor
 »»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»
 0 ms             60 FPS Goal                    16,67 ms
 
-Thats everything Minecraft has for:
-• calculating the World,
-• updating the Mobs,
-• making physics,
+Thats all the time Minecraft has to:
+• calculate the World,
+• update the Mobs,
+• make physics,
 • and to render an complete Image.
 Takes this more time, the FPS will go down.
 
@@ -156,7 +156,11 @@ This is called rasterization.
 
 ### 4. Fragment Shader
 
-The Fragment Shader runs for every single pixel.
+Many beginners think...
+"The Fragment Shader runs once per object."
+
+✕ Wrong
+It works for every pixel.
 
 At 1920×1080, that is:
         1920 × 1080 = 2073600
