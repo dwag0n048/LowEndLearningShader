@@ -1,6 +1,7 @@
 # LowEndLearningShader
 
 A shader pack focused on learning computer graphics and GLSL while achieving beautiful visuals with high performance.
+Here you will see my current progress.
 
 ## Goals
 
