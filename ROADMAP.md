@@ -3,15 +3,15 @@ Its recommended to view it in the Code view instead of the Preview
 LowEndLearningShader - Roadmap
 
 [██████████] GPU vs CPU 
-[██████████] GLSL Grundlagen
+[██████████] GLSL Foundation
 [██████████] Vertex Shader
 [██████████] Fragment Shader
 [██████████] vec2 / vec3 / vec4
 [██████████] Uniforms
 [██████████] Texture Coordinates
-[██████████] Farben
+[██████████] Colors
 [██████████] Sinus
-[██████████] Animation
+[██████████] Animations
 [██████████] UV-Manipulation
 
 [░░░░░░░░░░] Texture Sampling
