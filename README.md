@@ -9,7 +9,7 @@ Here you will see my current progress.
 - Learn Computer Graphics
 - Learn Minecraft's rendering pipeline
 - Create a performant shader
-- Document everything
+
 
 Status:
 v0.1 - In Development
