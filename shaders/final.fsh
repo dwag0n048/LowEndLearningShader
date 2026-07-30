@@ -15,6 +15,12 @@ const float HEAT_SECOND_FREQUENCY = 0.4;
 
 const float WATER_STRENGTH = 0.006;
 
+struct WaterData
+{
+    vec2 uv;
+    float waves;
+};
+
 vec2 HeatDistortion(vec2 uv)
 {
     float wave1 = sin(frameTimeCounter * HEAT_SPEED + uv.y * HEAT_FREQUENCY);
@@ -27,7 +33,7 @@ vec2 HeatDistortion(vec2 uv)
     return uv;
 }
 
-vec2 WaterWave(vec2 uv)
+WaterData WaterWave(vec2 uv)
 {
     float wave1 = sin(uv.x * 30.0 + frameTimeCounter * 3.0);
     float wave2 = sin((uv.x + uv.y) * 18.0 - frameTimeCounter * 2.1);
@@ -37,7 +43,12 @@ vec2 WaterWave(vec2 uv)
 
     uv.y += waves * WATER_STRENGTH;
 
-    return uv;
+    WaterData data;
+
+    data.uv = uv;
+    data.waves = waves;
+
+    return data;
 }
 
 vec3 ApplyBrightness(vec3 color)
@@ -59,16 +70,20 @@ void main() {
     vec2 uv = texcoord;
 
     // UV Stage
-    uv = HeatDistortion(uv);
-    uv = WaterWave(uv);
+    WaterData water = WaterWave(uv);
+    uv = water.uv;
 
     // Sampling
     vec3 color = texture(colortex0, uv).rgb;
+
+    float highlight = max(water.waves, 0.0);
+
 
     // Color Stage
     color = ApplyBrightness(color);
     color = ApplyContrast(color);
     color = ApplySaturation(color);
+    color += highlight * 0.5;
 
     // Output
     fragColor = vec4(color, 1.0);
