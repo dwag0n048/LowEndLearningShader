@@ -76,14 +76,14 @@ void main() {
     // Sampling
     vec3 color = texture(colortex0, uv).rgb;
 
-    float highlight = max(water.waves, 0.0);
+    float highlight = smoothstep(0.8, 1.0, water.waves);
 
 
     // Color Stage
     color = ApplyBrightness(color);
     color = ApplyContrast(color);
     color = ApplySaturation(color);
-    color += highlight * 0.5;
+    color += vec3(0.8, 0.9, 1.0) * highlight * 0.05;
 
     // Output
     fragColor = vec4(color, 1.0);
