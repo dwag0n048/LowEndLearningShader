@@ -77,13 +77,13 @@ void main() {
     vec3 color = texture(colortex0, uv).rgb;
 
     float highlight = smoothstep(0.8, 1.0, water.waves);
-
+    float fakeFresnel = pow(1.0 - uv.y, 5.0);
 
     // Color Stage
     color = ApplyBrightness(color);
     color = ApplyContrast(color);
     color = ApplySaturation(color);
-    color += vec3(0.8, 0.9, 1.0) * highlight * 0.05;
+    color += vec3(0.8, 0.9, 1.0) * highlight * fakeFresnel * 0.15;
 
     // Output
     fragColor = vec4(color, 1.0);
