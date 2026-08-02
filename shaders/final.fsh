@@ -33,13 +33,18 @@ vec2 HeatDistortion(vec2 uv)
     return uv;
 }
 
-WaterData WaterWave(vec2 uv)
+float GetWave(vec2 uv)
 {
     float wave1 = sin(uv.x * 30.0 + frameTimeCounter * 3.0);
     float wave2 = sin((uv.x + uv.y) * 18.0 - frameTimeCounter * 2.1);
     float wave3 = sin((uv.x - uv.y) * 22.0 + frameTimeCounter * 1.6);
 
-    float waves = (wave1 + wave2 + wave3) / 3.0;
+    return (wave1 + wave2 + wave3) / 3.0;
+}
+
+WaterData WaterWave(vec2 uv)
+{    
+   float waves = GetWave(uv);
 
     uv.y += waves * WATER_STRENGTH;
 
@@ -73,6 +78,18 @@ void main() {
     WaterData water = WaterWave(uv);
     uv = water.uv;
 
+    float offset = 0.01;
+
+    float left = GetWave(texcoord - vec2(offset, 0.0));
+    float right = GetWave(texcoord + vec2(offset, 0.0));
+    float down = GetWave(texcoord - vec2(0.0, offset));
+    float up = GetWave(texcoord + vec2(0.0, offset));
+
+    float slopeX = right - left;
+    float slopeY = up - down;
+
+    vec3 normal = normalize(vec3(-slopeX * 5.0, 1.0, -slopeY * 5.0));
+
     // Sampling
     vec3 color = texture(colortex0, uv).rgb;
 
@@ -85,6 +102,10 @@ void main() {
     color = ApplySaturation(color);
     color += vec3(0.8, 0.9, 1.0) * highlight * fakeFresnel * 0.15;
 
+    vec3 lightDir = normalize(vec3(0.4, 1.0, 0.3));
+    float light = max(dot(normal, lightDir), 0.0);
+
+    vec3 waterColor = texture(colortex0, uv).rgb;
     // Output
-    fragColor = vec4(color, 1.0);
+    fragColor = vec4(waterColor * light, 1.0);
 }
