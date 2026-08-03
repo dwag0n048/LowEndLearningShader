@@ -14,6 +14,7 @@ const float HEAT_SECOND_SPEED = 1.7;
 const float HEAT_SECOND_FREQUENCY = 0.4;
 
 const float WATER_STRENGTH = 0.006;
+const float WATER_AMBIENT = 0.40;
 
 struct WaterData
 {
@@ -103,7 +104,9 @@ void main() {
     color += vec3(0.8, 0.9, 1.0) * highlight * fakeFresnel * 0.15;
 
     vec3 lightDir = normalize(vec3(0.4, 1.0, 0.3));
-    float light = max(dot(normal, lightDir), 0.0);
+    float diffuse = max(dot(normal, lightDir), 0.0);
+    float light = WATER_AMBIENT + diffuse * (1.0 - WATER_AMBIENT);
+
 
     vec3 waterColor = texture(colortex0, uv).rgb;
     // Output
