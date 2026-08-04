@@ -12,4 +12,4 @@ Here you will see my current progress.
 
 
 Status:
-v0.1 - Finished
+v0.2 - In Development
